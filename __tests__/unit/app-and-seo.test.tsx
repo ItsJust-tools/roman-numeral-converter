@@ -93,16 +93,22 @@ describe('app and seo', () => {
   it('covers tool definition and helper exports', async () => {
     expect(cn('a', undefined, 'b', false, null, 'c')).toBe('a b c');
     expect(getPublicSiteUrl()).toBe('http://localhost:3000');
-    expect(romanNumeralTool.deserialize({ direction: 'number', numberInput: '1987', romanInput: '' })).toEqual({
+    expect(
+      romanNumeralTool.deserialize({ direction: 'number', numberInput: '1987', romanInput: '' })
+    ).toEqual({
       success: true,
       data: { direction: 'number', numberInput: '1987', romanInput: '' },
     });
     expect(romanNumeralTool.deserialize({ nope: true })).toEqual({
       success: false,
-      error: 'Invalid data format: expected { direction: "number"|"roman", numberInput: string, romanInput: string }',
+      error:
+        'Invalid data format: expected { direction: "number"|"roman", numberInput: string, romanInput: string }',
     });
-    expect(romanNumeralTool.serialize({ ...DEFAULT_STATE, numberInput: '42' })).toContain('"numberInput":"42"');
-    const exporters = (romanNumeralTool as { exporters?: Array<{ loader: ExporterLoader }> }).exporters ?? [];
+    expect(romanNumeralTool.serialize({ ...DEFAULT_STATE, numberInput: '42' })).toContain(
+      '"numberInput":"42"'
+    );
+    const exporters =
+      (romanNumeralTool as { exporters?: Array<{ loader: ExporterLoader }> }).exporters ?? [];
     expect(exporters).toHaveLength(4);
     const first = exporters[0];
     expect(first).toBeDefined();
@@ -117,13 +123,18 @@ describe('app and seo', () => {
       <>
         <ToolToolbar />
         <ToolSidebar text="XIV" fontSize={16} onFontSizeChange={() => {}} />
-        <ToolCanvas state={{ ...DEFAULT_STATE, direction: 'number', numberInput: '14' }} fontSize={16} />
+        <ToolCanvas
+          state={{ ...DEFAULT_STATE, direction: 'number', numberInput: '14' }}
+          fontSize={16}
+        />
       </>
     );
 
     expect(screen.getByRole('link', { name: 'Open help page' })).toBeInTheDocument();
     expect(screen.getByText('3')).toBeInTheDocument(); // character count for "XIV"
-    expect(screen.getByRole('application', { name: 'Roman numeral converter canvas' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('application', { name: 'Roman numeral converter canvas' })
+    ).toBeInTheDocument();
     expect(screen.getByTestId('conversion-result')).toHaveTextContent('XIV');
   });
 });

@@ -61,7 +61,9 @@ vi.mock('@/tool', () => ({
     theme: { brand: 'Base Converter' },
   },
   templateBaseVersion: '1.1.0',
-  ToolCanvas: ({ state }: { state: { numberInput: string } }) => <div>canvas:{state.numberInput}</div>,
+  ToolCanvas: ({ state }: { state: { numberInput: string } }) => (
+    <div>canvas:{state.numberInput}</div>
+  ),
   ToolToolbar: () => <div>toolbar</div>,
   ToolSidebar: ({ text }: { text: string }) => <div>sidebar:{text}</div>,
 }));
@@ -69,7 +71,10 @@ vi.mock('@/tool', () => ({
 vi.mock('@/tool/tool-definition', () => ({
   romanNumeralTool: {
     serialize: (state: unknown) => JSON.stringify(state),
-    deserialize: () => ({ success: true, data: { direction: 'number', numberInput: 'From Shared Url', romanInput: '' } }),
+    deserialize: () => ({
+      success: true,
+      data: { direction: 'number', numberInput: 'From Shared Url', romanInput: '' },
+    }),
   },
 }));
 

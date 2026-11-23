@@ -11,13 +11,7 @@ import {
 } from 'react';
 import { ToolShell, useTool, ImportExport } from '@itsjust/core';
 import { compressToEncodedURIComponent, decompressFromEncodedURIComponent } from 'lz-string';
-import {
-  toolConfig,
-  templateBaseVersion,
-  ToolCanvas,
-  ToolToolbar,
-  ToolSidebar,
-} from '@/tool';
+import { toolConfig, templateBaseVersion, ToolCanvas, ToolToolbar, ToolSidebar } from '@/tool';
 import { romanNumeralTool as romanNumeralToolDef } from '@/tool/tool-definition';
 import type { ToolState } from '@/tool/types';
 import { DEFAULT_STATE } from '@/tool/types';
@@ -134,7 +128,10 @@ export default function ToolClient() {
 
   const sidebarContent = (
     <ToolSidebar
- text={state.direction === 'number' ? state.numberInput : state.romanInput} fontSize={fontSize} onFontSizeChange={handleFontSizeChange} />
+      text={state.direction === 'number' ? state.numberInput : state.romanInput}
+      fontSize={fontSize}
+      onFontSizeChange={handleFontSizeChange}
+    />
   );
 
   const canvasContent = (

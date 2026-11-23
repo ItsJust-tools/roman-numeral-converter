@@ -56,8 +56,7 @@ export function romanToNumber(input: string): { value: number | null; error: str
       error: 'Invalid numeral: a character repeats more than three times (e.g. MMMM, IIII).',
     };
   }
-  const values: number[] = normalized
-.split('').map((char) => CHAR_VALUES[char] ?? 0);
+  const values: number[] = normalized.split('').map((char) => CHAR_VALUES[char] ?? 0);
   let total = 0;
   for (let i = 0; i < values.length; i++) {
     const current: number = values[i] ?? 0;
@@ -121,7 +120,9 @@ export function convert(state: ToolState): ConversionResult {
     if (value === null) {
       return {
         value: '',
-        error: state.numberInput.trim() ? `"${state.numberInput.trim()}" is not a valid integer.` : null,
+        error: state.numberInput.trim()
+          ? `"${state.numberInput.trim()}" is not a valid integer.`
+          : null,
       };
     }
     if (value < MIN_ROMAN || value > MAX_ROMAN) {
@@ -146,14 +147,18 @@ export const romanNumeralTool: Tool<ToolState> = {
   serialize: (state) => JSON.stringify(state),
   deserialize: (data): DeserializeResult<ToolState> => {
     if (typeof data !== 'object' || data === null) {
-      return { success: false, error: 'Invalid data format: expected Roman numeral converter state object' };
+      return {
+        success: false,
+        error: 'Invalid data format: expected Roman numeral converter state object',
+      };
     }
     const v = data as Partial<ToolState>;
     const directionOk = v.direction === 'number' || v.direction === 'roman';
     if (!directionOk || typeof v.numberInput !== 'string' || typeof v.romanInput !== 'string') {
       return {
         success: false,
-        error: 'Invalid data format: expected { direction: "number"|"roman", numberInput: string, romanInput: string }',
+        error:
+          'Invalid data format: expected { direction: "number"|"roman", numberInput: string, romanInput: string }',
       };
     }
     return {

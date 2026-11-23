@@ -53,9 +53,8 @@ export function ToolSidebar({ text, fontSize, onFontSizeChange }: ToolSidebarPro
       <div className="sidebar-section">
         <h3>Numeral reference</h3>
         <p className="text-xs leading-relaxed">
-          Roman letters: I=1, V=5, X=10, L=50, C=100, D=500, M=1000.
-          Subtractive pairs: IV, IX, XL, XC, CD, CM.
-          Lower-case input is accepted; output is upper-case.
+          Roman letters: I=1, V=5, X=10, L=50, C=100, D=500, M=1000. Subtractive pairs: IV, IX, XL,
+          XC, CD, CM. Lower-case input is accepted; output is upper-case.
         </p>
       </div>
     </div>

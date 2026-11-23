@@ -120,8 +120,12 @@ describe('convert (bidirectional state)', () => {
   });
 
   it('reports out-of-range numbers (0, 4000)', () => {
-    expect(convert(state({ direction: 'number', numberInput: '0' })).error).toMatch(/out of range/i);
-    expect(convert(state({ direction: 'number', numberInput: '4000' })).error).toMatch(/out of range/i);
+    expect(convert(state({ direction: 'number', numberInput: '0' })).error).toMatch(
+      /out of range/i
+    );
+    expect(convert(state({ direction: 'number', numberInput: '4000' })).error).toMatch(
+      /out of range/i
+    );
   });
 
   it('reports invalid roman input', () => {
@@ -166,7 +170,8 @@ describe('serialize/deserialize roundtrip', () => {
     expect(romanNumeralTool.deserialize(null).success).toBe(false);
     expect(romanNumeralTool.deserialize('nope').success).toBe(false);
     expect(
-      romanNumeralTool.deserialize({ direction: 'sideways', numberInput: '', romanInput: '' }).success
+      romanNumeralTool.deserialize({ direction: 'sideways', numberInput: '', romanInput: '' })
+        .success
     ).toBe(false);
     expect(romanNumeralTool.deserialize({ direction: 'number' }).success).toBe(false);
     expect(
